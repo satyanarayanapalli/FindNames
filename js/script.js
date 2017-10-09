@@ -15,6 +15,7 @@ $(function()
 		var time_tag=$("#times_tag");
     var restart_div=$('.restart_div');
   var restart_btn=$('.restart_btn');
+  var retry_from_finalscreen=$('.retry');
 
 
 
@@ -45,9 +46,9 @@ $(function()
   var next_level=false;
 
 		var count=0;
-    var tim=20;
     var index=0;
     var interval=0;
+    var wrong_flag=false;
 		
        
     var myArray = [0,1,2,3,4,5,6,7,8];
@@ -66,11 +67,30 @@ $(function()
     x = 3
     interval=setInterval(timestart,1000);
  
-    $('#btnPlayCircle').hide();
-    $('#btnPlayShadow').hide();
+   /* $('#btnPlayCircle').hide();
+    $('#btnPlayShadow').hide();*/
     $(".first_screen").hide();
      $(".game_screen").show();
+       $(".final_container").hide();
     
+  });
+
+  retry_from_finalscreen.click(function()
+  {
+      
+              clearInterval(interval);  
+              sr = Math.floor(Math.random() * 20);
+              shuffle(myArray);
+              name=country[sr];
+              total_name="";
+              text.val("");
+              times=21;
+              interval=setInterval(timestart,1000);
+              count=0;
+              update();
+               $(".first_screen").hide();
+                $(".game_screen").show();
+              $(".final_container").hide();
   });
 
 
@@ -141,13 +161,35 @@ function show(id)
               {
                 index=0;
               }
-
               var ids=this.id;
               $("#"+ids).text(characters);
               
             });
 
           }
+
+          restart_btn.click(function()
+            {
+              restart_div.slideUp();
+              clearInterval(interval);  
+              if(!wrong_flag)
+              {
+                sr = Math.floor(Math.random() * 20);
+                shuffle(myArray);
+              }
+              
+              
+              name=country[sr];
+              total_name="";
+              text.val("");
+              
+              times=21;
+              interval=setInterval(timestart,1000);
+              count=0;
+              update();
+
+            });
+
 			function complete()
 			{
 				count++;
@@ -156,13 +198,16 @@ function show(id)
           clearInterval(interval);
           restart_div.slideDown();
             restart_btn.focus();
-                $(".small_text").text("Click for next level ");
+           
+                
 					if(total_name==country[sr])
 					{
             
+            wrong_flag=false;
 						restart_div.slideDown();
             restart_btn.focus();
-                $(".small_text").text("Click for next level ");
+             restart_btn.html("Click for next level");
+               // $(".small_text").text("Click for next level ");
              
              time_tag.text(times);
               next_level=true;
@@ -170,8 +215,9 @@ function show(id)
 					}
 					else
 					{
+            wrong_flag=true;
              restart_div.slideDown();
-             restart_btn.html("Sorry your loss the game");
+             restart_btn.html("Try Again");
               restart_btn.focus();
               next_level=false;
              
@@ -191,13 +237,13 @@ function show(id)
 				
 				if(times<=0)
 				{
-					complete();
+					//complete();
           times=0;
         time_tag.text(times);
           clearInterval(interval);
-          restart_div.slideDown();
-             restart_btn.html("Sorry your loss the game");
-              restart_btn.focus();
+           $(".first_screen").hide();
+          $(".game_screen").hide();
+          $(".final_container").show();
               next_level=false;
 				}
 				
