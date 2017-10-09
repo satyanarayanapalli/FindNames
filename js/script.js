@@ -42,13 +42,14 @@ $(function()
         country[19] = "IMPORTANT";
 
 
-  var remain_time=20;
+  var remain_time=0;
   var next_level=false;
 
 		var count=0;
     var index=0;
     var interval=0;
     var wrong_flag=false;
+    var word_count=0;
 		
        
     var myArray = [0,1,2,3,4,5,6,7,8];
@@ -183,7 +184,7 @@ function show(id)
               total_name="";
               text.val("");
               
-              times=21;
+              times=21+remain_time;
               interval=setInterval(timestart,1000);
               count=0;
               update();
@@ -204,12 +205,14 @@ function show(id)
 					{
             
             wrong_flag=false;
+            word_count++;
 						restart_div.slideDown();
             restart_btn.focus();
              restart_btn.html("Click for next level");
                // $(".small_text").text("Click for next level ");
              
              time_tag.text(times);
+             remain_time=times;
               next_level=true;
 
 					}
@@ -217,6 +220,7 @@ function show(id)
 					{
             wrong_flag=true;
              restart_div.slideDown();
+             remain_time=0;
              restart_btn.html("Try Again");
               restart_btn.focus();
               next_level=false;
@@ -244,6 +248,7 @@ function show(id)
            $(".first_screen").hide();
           $(".game_screen").hide();
           $(".final_container").show();
+          $("#go_score").text(word_count);
               next_level=false;
 				}
 				
