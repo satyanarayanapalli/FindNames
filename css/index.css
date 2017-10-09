@@ -296,6 +296,42 @@ a{
   font-size: 1rem;
 }
 
+
+
+  @media only screen and (max-width:420px)
+  {
+      html
+      {
+        font-size:14px;
+      }
+      .divs
+      {
+         padding-top: 35%;
+      }
+      .restart_btn
+      {
+        margin-top: 80%;
+      }
+    
+  }
+    @media (min-width:421px) and (max-width:520px)
+  {
+      html
+      {
+        font-size:14px;
+      }
+      .divs
+      {
+         padding-top: 28%;
+      }
+      .restart_btn
+      {
+        margin-top: 80%;
+      }
+    
+  }
+
+
   @media only screen and (max-width:720px) and (orientation:landscape)
   {
       html
@@ -327,8 +363,7 @@ a{
       {
          padding-top: 15%;
       }
-     
-
+    
   }
 
 
