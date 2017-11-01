@@ -63,8 +63,8 @@ $(function()
 
 
 
-  $('#btnPlayCircle').click(function() {
-    x = 3
+  $('.play_btn').click(function() {
+    
     interval=setInterval(timestart,1000);
  
    /* $('#btnPlayCircle').hide();
